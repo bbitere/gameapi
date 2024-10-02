@@ -2,6 +2,7 @@ package main
 
 import (
 	api "github.com/bbitere/gameapi.git/pkg/api"
+	utils "github.com/bbitere/gameapi.git/pkg/utils"
 	cors "github.com/gin-contrib/cors"
 	gin "github.com/gin-gonic/gin"
 )
@@ -9,6 +10,8 @@ import (
 
 func main() {
 
+
+	utils.Log_initContainerLogger( );
 
 	var httprouter  = gin.New()
 	var httpsrouter = gin.New()
