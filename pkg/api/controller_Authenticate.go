@@ -5,14 +5,30 @@ import (
 	//_ "your_project/docs" // importă pachetul docs generat de Swagger
 )
 
+
+type InputAuthenticate struct{
+
+	Token 			string 		`json:"sessionUID"`
+}
+type OutputAuthenticate struct{
+
+	UserID			string 		`json:"userID"`
+	Wallet  		string  	`json:"wallet"`
+	Currency  		string  	`json:"currency"`
+	Error  			string  	`json:"error"`
+	Description 	string  	`json:"description"`
+
+}
 // @Summary Authenticate user
 // @ID Authenticate
 // @Produce json
-// @Param data body InputAuthData true "Auth input data"
-// @Success 200 {object} OutputAuthData
-// @Failure 400 {object} OutputAuthData
+// @Param data body InputAuthenticate true "Auth input data"
+// @Success 200 {object} OutputAuthenticate
+// @Failure 400 {object} OutputAuthenticate
 // @Router /authenticate [post]
 func Authenticate(c *gin.Context){
 
+	var inputData = InputAuthenticate();
+	var outData   = OutputAuthenticate();
 	
 }

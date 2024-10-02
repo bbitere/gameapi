@@ -4,6 +4,7 @@ import (
 	gin "github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	//api "github.com/bbitere/gameapi.git/pkg/api"
 	//_ "your_project/docs" // importă pachetul docs generat de Swagger
 )
 

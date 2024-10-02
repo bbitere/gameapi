@@ -1,7 +1,7 @@
 package main
 
 import (
-	api "github.com/bbitere/gameapi.git"
+	api "github.com/bbitere/gameapi.git/pkg/api"
 	cors "github.com/gin-contrib/cors"
 	gin "github.com/gin-gonic/gin"
 )
