@@ -1,0 +1,53 @@
+server: 
+  httpshost: 0.0.0.0  
+  httpsport: 44395
+  httphost: 0.0.0.0
+  httpport: 8095
+  crt: "../certificates/STAR_gambling-solutions_ro.crt"
+  key: "../certificates/gambling-solutions.ro 1.key"
+  # crt: "../certificates/server.crt"
+  # key: "../certificates/server.key"
+  servicename: "coins-backend-service"
+  loglevel: 3 # Debug=4, Info=3 Warning=2 Error=1  
+  environment: "dev"  # dev / prod
+
+ 
+kafka: 
+  url: "localhost:9092" #service container on the kafka host  
+  # url: "localhost:29092" #service container localhost
+  # url: "157.90.153.178:29092" #service container outside kafka host  
+  topicname: "originals" 
+  flushbytes: 10000
+  flushmessages: 1
+
+wallet: 
+  url: "https://test2-core-ro-api.gambling-solutions.ro/pragmatic"
+  authenticateendpoint: "/authenticate.html"
+  betendpoint: "/bet.html"
+  balanceendpoint: "/balance.html"
+  resultendpoint: "/result.html"
+  gameid: "vs20olympgate"
+  providerid: "PragmaticPlay"
+  secretkey: "6cE5Fa1286624159"
+
+game: 
+  gameid: "coin"
+  platform: "originals"
+  rtp: 0.98
+  head: "H"
+  tails: "F"
+  rtptest: true
+
+roundstatus: 
+  complete: "COMPLETE"
+  ongoing: "ONGOING"
+  locked_wallet: "LOCKED_PENDING_PLATFORM_WALLET"
+  reverted: "REVERTED"
+
+rng: 
+  url: "http://localhost:8084/randoms?numbers="
+  # url: "http://rng-backend-service:8000/randoms?numbers="
+  batchsize: 500
+
+
+
