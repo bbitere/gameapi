@@ -1,0 +1,674 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the backend for the Interactive service",
+        "title": "InteractiveService",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8081",
+    "basePath": "/",
+    "paths": {
+        "/Player": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Play user",
+                "operationId": "Controller_PlayerList",
+                "parameters": [
+                    {
+                        "description": "Play input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayerListInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayerListOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayerListOutputErr"
+                        }
+                    }
+                }
+            }
+        },
+        "/authenticate": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Authenticate user",
+                "operationId": "Controller_Authenticate",
+                "parameters": [
+                    {
+                        "description": "Auth input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.AuthenticateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.AuthenticateOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.AuthenticateOutputErr"
+                        }
+                    }
+                }
+            }
+        },
+        "/cashout": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "do cashot for user",
+                "operationId": "Controller_Cashout",
+                "parameters": [
+                    {
+                        "description": "Play input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.CashoutInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.CashoutOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.CashoutOutputErr"
+                        }
+                    }
+                }
+            }
+        },
+        "/gameupdate": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "update the entire game for all user",
+                "operationId": "Controller_GameUpdate",
+                "parameters": [
+                    {
+                        "description": "Play input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.GameUpdateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.GameUpdateOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.GameUpdateOutputErr"
+                        }
+                    }
+                }
+            }
+        },
+        "/history": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Play user",
+                "operationId": "Controller_HistoryList",
+                "parameters": [
+                    {
+                        "description": "Play input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.HistoryListInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.HistoryListOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.HistoryListOutputErr"
+                        }
+                    }
+                }
+            }
+        },
+        "/play": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Play user",
+                "operationId": "Controller_Play",
+                "parameters": [
+                    {
+                        "description": "Play input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayOutputErr"
+                        }
+                    }
+                }
+            }
+        },
+        "/playautobet": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Play user",
+                "operationId": "Controller_PlayAutobet",
+                "parameters": [
+                    {
+                        "description": "Play input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayAutobetInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayAutobetOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayAutobetOutputErr"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.AuthenticateInput": {
+            "type": "object",
+            "properties": {
+                "sessionUID": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.AuthenticateOutput": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "userID": {
+                    "type": "string"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.AuthenticateOutputErr": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "userID": {
+                    "type": "string"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.CashoutInput": {
+            "type": "object",
+            "properties": {
+                "StopOnLoss": {
+                    "type": "string"
+                },
+                "bet": {
+                    "type": "string"
+                },
+                "multiplBashout": {
+                    "type": "string"
+                },
+                "numOfAutobet": {
+                    "type": "integer"
+                },
+                "sessionUID": {
+                    "type": "string"
+                },
+                "stopOnProfit": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.CashoutOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.CashoutOutputErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.GameUpdateInput": {
+            "type": "object",
+            "properties": {
+                "sessionUID": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.GameUpdateOutput": {
+            "type": "object",
+            "properties": {
+                "announce": {
+                    "$ref": "#/definitions/api.TypeCrashArg_Annonce"
+                },
+                "betStatus": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "gameState": {
+                    "type": "string"
+                },
+                "msg": {
+                    "$ref": "#/definitions/api.TypeCrashArg_MsgWinOrLose"
+                },
+                "playerlist": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.PlayerItem"
+                    }
+                },
+                "playing": {
+                    "$ref": "#/definitions/api.TypeCrashArg_Playing"
+                }
+            }
+        },
+        "api.GameUpdateOutputErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.HistoryItem": {
+            "type": "object",
+            "properties": {
+                "bet": {
+                    "type": "string"
+                },
+                "betCurrency": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "multiplicator": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "win": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.HistoryListInput": {
+            "type": "object",
+            "properties": {
+                "sessionUID": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer"
+                },
+                "startOffset": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.HistoryListOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.HistoryItem"
+                    }
+                }
+            }
+        },
+        "api.HistoryListOutputErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayAutobetInput": {
+            "type": "object",
+            "properties": {
+                "StopOnLoss": {
+                    "type": "string"
+                },
+                "bet": {
+                    "type": "string"
+                },
+                "multiplBashout": {
+                    "type": "string"
+                },
+                "numOfAutobet": {
+                    "type": "integer"
+                },
+                "sessionUID": {
+                    "type": "string"
+                },
+                "stopOnProfit": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayAutobetOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.PlayAutobetOutputErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayInput": {
+            "type": "object",
+            "properties": {
+                "bet": {
+                    "type": "string"
+                },
+                "commandID": {
+                    "type": "string"
+                },
+                "multiplBashout": {
+                    "type": "string"
+                },
+                "sessionUID": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayOutputErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayerItem": {
+            "type": "object",
+            "properties": {
+                "bet": {
+                    "type": "string"
+                },
+                "cashout": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "flg": {
+                    "type": "string"
+                },
+                "isCashedout": {
+                    "type": "boolean"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayerListInput": {
+            "type": "object",
+            "properties": {
+                "sessionUID": {
+                    "type": "string"
+                },
+                "size": {
+                    "type": "integer"
+                },
+                "startOffset": {
+                    "type": "integer"
+                }
+            }
+        },
+        "api.PlayerListOutput": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/api.PlayerItem"
+                    }
+                }
+            }
+        },
+        "api.PlayerListOutputErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "wallet": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.TypeCrashArg_Annonce": {
+            "type": "object",
+            "properties": {
+                "gameWillStart": {
+                    "type": "number"
+                }
+            }
+        },
+        "api.TypeCrashArg_MsgWinOrLose": {
+            "type": "object",
+            "properties": {
+                "isWin": {
+                    "type": "string"
+                },
+                "multiplicator": {
+                    "type": "string"
+                },
+                "timeline": {
+                    "type": "number"
+                },
+                "walletAfter": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.TypeCrashArg_Playing": {
+            "type": "object",
+            "properties": {
+                "multiplicator": {
+                    "type": "string"
+                },
+                "timeline": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

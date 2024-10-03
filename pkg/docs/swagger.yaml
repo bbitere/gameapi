@@ -1,0 +1,436 @@
+basePath: /
+definitions:
+  api.AuthenticateInput:
+    properties:
+      sessionUID:
+        type: string
+    type: object
+  api.AuthenticateOutput:
+    properties:
+      currency:
+        type: string
+      description:
+        type: string
+      error:
+        type: integer
+      userID:
+        type: string
+      wallet:
+        type: string
+    type: object
+  api.AuthenticateOutputErr:
+    properties:
+      currency:
+        type: string
+      description:
+        type: string
+      error:
+        type: integer
+      userID:
+        type: string
+      wallet:
+        type: string
+    type: object
+  api.CashoutInput:
+    properties:
+      StopOnLoss:
+        type: string
+      bet:
+        type: string
+      multiplBashout:
+        type: string
+      numOfAutobet:
+        type: integer
+      sessionUID:
+        type: string
+      stopOnProfit:
+        type: string
+    type: object
+  api.CashoutOutput:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+    type: object
+  api.CashoutOutputErr:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.GameUpdateInput:
+    properties:
+      sessionUID:
+        type: string
+    type: object
+  api.GameUpdateOutput:
+    properties:
+      announce:
+        $ref: '#/definitions/api.TypeCrashArg_Annonce'
+      betStatus:
+        type: string
+      description:
+        type: string
+      error:
+        type: integer
+      gameState:
+        type: string
+      msg:
+        $ref: '#/definitions/api.TypeCrashArg_MsgWinOrLose'
+      playerlist:
+        items:
+          $ref: '#/definitions/api.PlayerItem'
+        type: array
+      playing:
+        $ref: '#/definitions/api.TypeCrashArg_Playing'
+    type: object
+  api.GameUpdateOutputErr:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.HistoryItem:
+    properties:
+      bet:
+        type: string
+      betCurrency:
+        type: string
+      currency:
+        type: string
+      details:
+        type: string
+      multiplicator:
+        type: string
+      time:
+        type: string
+      win:
+        type: string
+    type: object
+  api.HistoryListInput:
+    properties:
+      sessionUID:
+        type: string
+      size:
+        type: integer
+      startOffset:
+        type: integer
+    type: object
+  api.HistoryListOutput:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      list:
+        items:
+          $ref: '#/definitions/api.HistoryItem'
+        type: array
+    type: object
+  api.HistoryListOutputErr:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.PlayAutobetInput:
+    properties:
+      StopOnLoss:
+        type: string
+      bet:
+        type: string
+      multiplBashout:
+        type: string
+      numOfAutobet:
+        type: integer
+      sessionUID:
+        type: string
+      stopOnProfit:
+        type: string
+    type: object
+  api.PlayAutobetOutput:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+    type: object
+  api.PlayAutobetOutputErr:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.PlayInput:
+    properties:
+      bet:
+        type: string
+      commandID:
+        type: string
+      multiplBashout:
+        type: string
+      sessionUID:
+        type: string
+    type: object
+  api.PlayOutput:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.PlayOutputErr:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.PlayerItem:
+    properties:
+      bet:
+        type: string
+      cashout:
+        type: string
+      currency:
+        type: string
+      flg:
+        type: string
+      isCashedout:
+        type: boolean
+      time:
+        type: string
+      username:
+        type: string
+    type: object
+  api.PlayerListInput:
+    properties:
+      sessionUID:
+        type: string
+      size:
+        type: integer
+      startOffset:
+        type: integer
+    type: object
+  api.PlayerListOutput:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      list:
+        items:
+          $ref: '#/definitions/api.PlayerItem'
+        type: array
+    type: object
+  api.PlayerListOutputErr:
+    properties:
+      description:
+        type: string
+      error:
+        type: integer
+      wallet:
+        type: string
+    type: object
+  api.TypeCrashArg_Annonce:
+    properties:
+      gameWillStart:
+        type: number
+    type: object
+  api.TypeCrashArg_MsgWinOrLose:
+    properties:
+      isWin:
+        type: string
+      multiplicator:
+        type: string
+      timeline:
+        type: number
+      walletAfter:
+        type: string
+    type: object
+  api.TypeCrashArg_Playing:
+    properties:
+      multiplicator:
+        type: string
+      timeline:
+        type: number
+    type: object
+host: localhost:8081
+info:
+  contact: {}
+  description: This is the backend for the Interactive service
+  title: InteractiveService
+  version: "1.0"
+paths:
+  /Player:
+    post:
+      operationId: Controller_PlayerList
+      parameters:
+      - description: Play input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.PlayerListInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.PlayerListOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.PlayerListOutputErr'
+      summary: Play user
+  /authenticate:
+    post:
+      operationId: Controller_Authenticate
+      parameters:
+      - description: Auth input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.AuthenticateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.AuthenticateOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.AuthenticateOutputErr'
+      summary: Authenticate user
+  /cashout:
+    post:
+      operationId: Controller_Cashout
+      parameters:
+      - description: Play input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.CashoutInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.CashoutOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.CashoutOutputErr'
+      summary: do cashot for user
+  /gameupdate:
+    post:
+      operationId: Controller_GameUpdate
+      parameters:
+      - description: Play input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.GameUpdateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.GameUpdateOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.GameUpdateOutputErr'
+      summary: update the entire game for all user
+  /history:
+    post:
+      operationId: Controller_HistoryList
+      parameters:
+      - description: Play input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.HistoryListInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.HistoryListOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.HistoryListOutputErr'
+      summary: Play user
+  /play:
+    post:
+      operationId: Controller_Play
+      parameters:
+      - description: Play input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.PlayInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.PlayOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.PlayOutputErr'
+      summary: Play user
+  /playautobet:
+    post:
+      operationId: Controller_PlayAutobet
+      parameters:
+      - description: Play input data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/api.PlayAutobetInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.PlayAutobetOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.PlayAutobetOutputErr'
+      summary: Play user
+swagger: "2.0"

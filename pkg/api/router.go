@@ -2,29 +2,58 @@ package api
 
 import (
 	gin "github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	//api "github.com/bbitere/gameapi.git/pkg/api"
 	//_ "your_project/docs" // importă pachetul docs generat de Swagger
+
+	"fmt"
+	"net/http"
+
+	utils "github.com/bbitere/gameapi.git/pkg/utils"
 )
 
-// @title InteractiveService
-// @version 1.0
-// @description This is the backend for the Interactive service
-// @host localhost:8081
-// @BasePath /
-// @query.collection.format multi
-func Api_InitRouter( httpRouter *gin.Engine, httpsRouter*gin.Engine ){
+func Api_InitRouter( httpRouter *gin.Engine ){
 
-	//router := gin.Default()
+	httpRouter.POST("/authenticate",  processRoute("Authenticate", Controller_Authenticate ))
+	httpRouter.POST("/play",  processRoute("Play", Controller_Play ) )
+	httpRouter.POST("/playautobet",  processRoute("PlayAutobet", Controller_PlayAutobet ) )
+	httpRouter.POST("/history",  processRoute("HistoryList", Controller_HistoryList ) )
+	httpRouter.POST("/cashout",  processRoute("Cashout", Controller_Cashout ) )
+	httpRouter.POST("/gameupdate",  processRoute("GameUpdate", Controller_GameUpdate ) )
+}
 
-	//router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
-	httpRouter.POST("/authenticate", Authenticate)
-	httpsRouter.POST("/authenticate", Authenticate)
-
-
-	httpRouter.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+func processRoute[TypeInput any, TypeResponse any, TypeResponseErr any]( 
+	nameMethod string, 
+	fnController func(inp* TypeInput) (*TypeResponse, *TypeResponseErr, error),
 	
+	)  func ( c *gin.Context ) {
 
+	var fnInnerProcess = func( c *gin.Context ){
+
+		var inputData = new (TypeInput);
+
+		utils.Log_log(nameMethod, "", 1, fmt.Sprint(inputData), "" )
+
+		var err = c.BindJSON(&inputData);
+		if( err != nil){
+
+			utils.Log_log(nameMethod, "", 1, fmt.Sprint(err), "Cannot read Token" )
+			c.IndentedJSON( http.StatusOK, err)
+		}
+		//-------------------------------------------------------------------------
+
+		var outData, outDataErr, err1 = fnController(inputData);
+
+		//-------------------------------------------------------------------------
+		if( err1 != nil){
+
+			if( outDataErr != nil){ }
+			c.IndentedJSON(http.StatusOK, outData)
+		}else{
+
+			c.IndentedJSON(http.StatusOK, outData)
+		}
+	}
+
+	
+	return fnInnerProcess;
 }
