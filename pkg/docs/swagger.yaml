@@ -5,7 +5,7 @@ definitions:
       sessionUID:
         type: string
     type: object
-  api.AuthenticateOutput:
+  api.AuthenticateResponse:
     properties:
       currency:
         type: string
@@ -18,7 +18,7 @@ definitions:
       wallet:
         type: string
     type: object
-  api.AuthenticateOutputErr:
+  api.AuthenticateResponseErr:
     properties:
       currency:
         type: string
@@ -46,14 +46,14 @@ definitions:
       stopOnProfit:
         type: string
     type: object
-  api.CashoutOutput:
+  api.CashoutResponse:
     properties:
       description:
         type: string
       error:
         type: integer
     type: object
-  api.CashoutOutputErr:
+  api.CashoutResponseErr:
     properties:
       description:
         type: string
@@ -67,7 +67,7 @@ definitions:
       sessionUID:
         type: string
     type: object
-  api.GameUpdateOutput:
+  api.GameUpdateResponse:
     properties:
       announce:
         $ref: '#/definitions/api.TypeCrashArg_Annonce'
@@ -88,7 +88,7 @@ definitions:
       playing:
         $ref: '#/definitions/api.TypeCrashArg_Playing'
     type: object
-  api.GameUpdateOutputErr:
+  api.GameUpdateResponseErr:
     properties:
       description:
         type: string
@@ -123,7 +123,7 @@ definitions:
       startOffset:
         type: integer
     type: object
-  api.HistoryListOutput:
+  api.HistoryListResponse:
     properties:
       description:
         type: string
@@ -134,7 +134,7 @@ definitions:
           $ref: '#/definitions/api.HistoryItem'
         type: array
     type: object
-  api.HistoryListOutputErr:
+  api.HistoryListResponseErr:
     properties:
       description:
         type: string
@@ -158,14 +158,14 @@ definitions:
       stopOnProfit:
         type: string
     type: object
-  api.PlayAutobetOutput:
+  api.PlayAutobetResponse:
     properties:
       description:
         type: string
       error:
         type: integer
     type: object
-  api.PlayAutobetOutputErr:
+  api.PlayAutobetResponseErr:
     properties:
       description:
         type: string
@@ -185,7 +185,7 @@ definitions:
       sessionUID:
         type: string
     type: object
-  api.PlayOutput:
+  api.PlayResponse:
     properties:
       description:
         type: string
@@ -194,7 +194,7 @@ definitions:
       wallet:
         type: string
     type: object
-  api.PlayOutputErr:
+  api.PlayResponseErr:
     properties:
       description:
         type: string
@@ -229,7 +229,7 @@ definitions:
       startOffset:
         type: integer
     type: object
-  api.PlayerListOutput:
+  api.PlayerListResponse:
     properties:
       description:
         type: string
@@ -240,7 +240,7 @@ definitions:
           $ref: '#/definitions/api.PlayerItem'
         type: array
     type: object
-  api.PlayerListOutputErr:
+  api.PlayerListResponseErr:
     properties:
       description:
         type: string
@@ -295,11 +295,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.PlayerListOutput'
+            $ref: '#/definitions/api.PlayerListResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.PlayerListOutputErr'
+            $ref: '#/definitions/api.PlayerListResponseErr'
       summary: Play user
   /authenticate:
     post:
@@ -317,11 +317,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.AuthenticateOutput'
+            $ref: '#/definitions/api.AuthenticateResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.AuthenticateOutputErr'
+            $ref: '#/definitions/api.AuthenticateResponseErr'
       summary: Authenticate user
   /cashout:
     post:
@@ -339,11 +339,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.CashoutOutput'
+            $ref: '#/definitions/api.CashoutResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.CashoutOutputErr'
+            $ref: '#/definitions/api.CashoutResponseErr'
       summary: do cashot for user
   /gameupdate:
     post:
@@ -361,11 +361,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.GameUpdateOutput'
+            $ref: '#/definitions/api.GameUpdateResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.GameUpdateOutputErr'
+            $ref: '#/definitions/api.GameUpdateResponseErr'
       summary: update the entire game for all user
   /history:
     post:
@@ -383,11 +383,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.HistoryListOutput'
+            $ref: '#/definitions/api.HistoryListResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.HistoryListOutputErr'
+            $ref: '#/definitions/api.HistoryListResponseErr'
       summary: Play user
   /play:
     post:
@@ -405,11 +405,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.PlayOutput'
+            $ref: '#/definitions/api.PlayResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.PlayOutputErr'
+            $ref: '#/definitions/api.PlayResponseErr'
       summary: Play user
   /playautobet:
     post:
@@ -427,10 +427,10 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/api.PlayAutobetOutput'
+            $ref: '#/definitions/api.PlayAutobetResponse'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/api.PlayAutobetOutputErr'
+            $ref: '#/definitions/api.PlayAutobetResponseErr'
       summary: Play user
 swagger: "2.0"

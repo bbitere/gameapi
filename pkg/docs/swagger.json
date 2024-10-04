@@ -31,13 +31,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.PlayerListOutput"
+                            "$ref": "#/definitions/api.PlayerListResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.PlayerListOutputErr"
+                            "$ref": "#/definitions/api.PlayerListResponseErr"
                         }
                     }
                 }
@@ -65,13 +65,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.AuthenticateOutput"
+                            "$ref": "#/definitions/api.AuthenticateResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.AuthenticateOutputErr"
+                            "$ref": "#/definitions/api.AuthenticateResponseErr"
                         }
                     }
                 }
@@ -99,13 +99,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.CashoutOutput"
+                            "$ref": "#/definitions/api.CashoutResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.CashoutOutputErr"
+                            "$ref": "#/definitions/api.CashoutResponseErr"
                         }
                     }
                 }
@@ -133,13 +133,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.GameUpdateOutput"
+                            "$ref": "#/definitions/api.GameUpdateResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.GameUpdateOutputErr"
+                            "$ref": "#/definitions/api.GameUpdateResponseErr"
                         }
                     }
                 }
@@ -167,13 +167,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.HistoryListOutput"
+                            "$ref": "#/definitions/api.HistoryListResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.HistoryListOutputErr"
+                            "$ref": "#/definitions/api.HistoryListResponseErr"
                         }
                     }
                 }
@@ -201,13 +201,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.PlayOutput"
+                            "$ref": "#/definitions/api.PlayResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.PlayOutputErr"
+                            "$ref": "#/definitions/api.PlayResponseErr"
                         }
                     }
                 }
@@ -235,13 +235,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/api.PlayAutobetOutput"
+                            "$ref": "#/definitions/api.PlayAutobetResponse"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/api.PlayAutobetOutputErr"
+                            "$ref": "#/definitions/api.PlayAutobetResponseErr"
                         }
                     }
                 }
@@ -257,7 +257,7 @@
                 }
             }
         },
-        "api.AuthenticateOutput": {
+        "api.AuthenticateResponse": {
             "type": "object",
             "properties": {
                 "currency": {
@@ -277,7 +277,7 @@
                 }
             }
         },
-        "api.AuthenticateOutputErr": {
+        "api.AuthenticateResponseErr": {
             "type": "object",
             "properties": {
                 "currency": {
@@ -320,7 +320,7 @@
                 }
             }
         },
-        "api.CashoutOutput": {
+        "api.CashoutResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -331,7 +331,7 @@
                 }
             }
         },
-        "api.CashoutOutputErr": {
+        "api.CashoutResponseErr": {
             "type": "object",
             "properties": {
                 "description": {
@@ -353,7 +353,7 @@
                 }
             }
         },
-        "api.GameUpdateOutput": {
+        "api.GameUpdateResponse": {
             "type": "object",
             "properties": {
                 "announce": {
@@ -385,7 +385,7 @@
                 }
             }
         },
-        "api.GameUpdateOutputErr": {
+        "api.GameUpdateResponseErr": {
             "type": "object",
             "properties": {
                 "description": {
@@ -439,7 +439,7 @@
                 }
             }
         },
-        "api.HistoryListOutput": {
+        "api.HistoryListResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -456,7 +456,7 @@
                 }
             }
         },
-        "api.HistoryListOutputErr": {
+        "api.HistoryListResponseErr": {
             "type": "object",
             "properties": {
                 "description": {
@@ -493,7 +493,7 @@
                 }
             }
         },
-        "api.PlayAutobetOutput": {
+        "api.PlayAutobetResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -504,7 +504,7 @@
                 }
             }
         },
-        "api.PlayAutobetOutputErr": {
+        "api.PlayAutobetResponseErr": {
             "type": "object",
             "properties": {
                 "description": {
@@ -535,7 +535,7 @@
                 }
             }
         },
-        "api.PlayOutput": {
+        "api.PlayResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -549,7 +549,7 @@
                 }
             }
         },
-        "api.PlayOutputErr": {
+        "api.PlayResponseErr": {
             "type": "object",
             "properties": {
                 "description": {
@@ -603,7 +603,7 @@
                 }
             }
         },
-        "api.PlayerListOutput": {
+        "api.PlayerListResponse": {
             "type": "object",
             "properties": {
                 "description": {
@@ -620,7 +620,7 @@
                 }
             }
         },
-        "api.PlayerListOutputErr": {
+        "api.PlayerListResponseErr": {
             "type": "object",
             "properties": {
                 "description": {
