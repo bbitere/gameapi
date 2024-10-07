@@ -1,0 +1,25 @@
+2024/10/07 11:41:39 Start log
+2024/10/07 11:43:14 Start log at : 70714-10-07 11:43:14
+2024/10/07 11:44:15 panic occurred: runtime error: invalid memory address or nil pointer dereference github.com/bbitere/gameapi.git/pkg/api.(*CrashGameLogic).initGame(0xc0004f0a40)
+	c:/Work/_GolangTest/gameapi/pkg/api/gameLogic.go:44 +0x67
+github.com/bbitere/gameapi.git/pkg/api.(*CrashGameLogic).Constr(0xc0004f0a40)
+	c:/Work/_GolangTest/gameapi/pkg/api/gameLogic.go:36 +0x91
+github.com/bbitere/gameapi.git/pkg/api.(*DataServer).constr(0xc00058e0c0)
+	c:/Work/_GolangTest/gameapi/pkg/api/dataServer.go:22 +0x3c
+github.com/bbitere/gameapi.git/pkg/api.DataServer_init()
+	c:/Work/_GolangTest/gameapi/pkg/api/dataServer.go:29 +0x2f
+main.main()
+	c:/Work/_GolangTest/gameapi/pkg/main.go:32 +0x3f
+2024/10/07 11:44:59 Start log at : 70759-10-07 11:44:59
+2024/10/07 11:45:16 panic occurred: runtime error: invalid memory address or nil pointer dereference github.com/bbitere/gameapi.git/pkg/api.(*CrashGameLogic).initGame(0xc0004d4d00)
+	c:/Work/_GolangTest/gameapi/pkg/api/gameLogic.go:44 +0x67
+github.com/bbitere/gameapi.git/pkg/api.(*CrashGameLogic).Constr(0xc0004d4d00)
+	c:/Work/_GolangTest/gameapi/pkg/api/gameLogic.go:36 +0x91
+github.com/bbitere/gameapi.git/pkg/api.(*DataServer).constr(0xc0004548e0)
+	c:/Work/_GolangTest/gameapi/pkg/api/dataServer.go:23 +0x88
+github.com/bbitere/gameapi.git/pkg/api.DataServer_init()
+	c:/Work/_GolangTest/gameapi/pkg/api/dataServer.go:30 +0x2f
+main.main()
+	c:/Work/_GolangTest/gameapi/pkg/main.go:32 +0x3f
+2024/10/07 11:45:32 Start log at : 70732-10-07 11:45:32
+2024/10/07 11:50:14 Start log at : 70714-10-07 11:50:14
