@@ -3,28 +3,38 @@ package http
 import (
 	"fmt"
 
-	api "github.com/bbitere/gameapi.git/pkg/api"
 	utils "github.com/bbitere/gameapi.git/pkg/utils"
 
-	"github.com/valyala/fasthttp"
+	fasthttp "github.com/valyala/fasthttp"
 
 	"encoding/json"
 )
 
+type CertsFastHttps struct{
+	Server_crt 		string
+	Server_key		string
+}
 
-func Init_HTTPFast(bHttps bool, URL_PORT string){
+func Init_HTTPFast(
+	certHttps *CertsFastHttps, URL_PORT string,
+	fnGetHandlerRouterFromApi func() func(ctx *fasthttp.RequestCtx) ){
 
-	if( bHttps){
+	var handlerRouter = fnGetHandlerRouterFromApi();
+
+	if( certHttps != nil ){
 
 		fmt.Println("Server running on https://localhost:"+URL_PORT)
-		if err := fasthttp.ListenAndServeTLS(":"+URL_PORT, "server.crt", "server.key", api.RouterFast_Handler); err != nil {
+		if err := fasthttp.ListenAndServeTLS(":"+URL_PORT, 
+						certHttps.Server_crt, 
+						certHttps.Server_key, 
+						handlerRouter ); err != nil {
 			panic(err)
 		}
 
 	} else {
 		// Rulează serverul pe portul 8080
 		fmt.Println("Server running on http://localhost:" + URL_PORT)
-		if err := fasthttp.ListenAndServe(":"+URL_PORT, api.RouterFast_Handler); err != nil {
+		if err := fasthttp.ListenAndServe(":"+URL_PORT, handlerRouter ); err != nil {
 			panic(err)
 		}
 	}

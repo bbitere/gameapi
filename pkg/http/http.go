@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	api "github.com/bbitere/gameapi.git/pkg/api"
 	utils "github.com/bbitere/gameapi.git/pkg/utils"
 	cors "github.com/gin-contrib/cors"
 	gin "github.com/gin-gonic/gin"
@@ -12,7 +11,14 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-func Init_HTTP_HTTPS(isHttps bool, URL_PORT string){
+type CertsHttps struct{
+	Cert_pem 	string
+	Key_pem		string
+}
+
+func Init_HttpServer(
+	certsForHttps *CertsHttps, URL_PORT string, 
+	fnInitApi func(router* gin.Engine) ){
 
 	var httprouter  = gin.New()
 	//var httpsrouter = gin.New()
@@ -25,7 +31,8 @@ func Init_HTTP_HTTPS(isHttps bool, URL_PORT string){
 	httprouter.Use( cors.New(corsConfig) )
 	//httpsrouter.Use( cors.New(corsConfig) )
 
-	api.Api_InitRouter( httprouter);
+	fnInitApi(httprouter);
+	//api.Api_InitRouter( httprouter);
 	//api.Api_InitRouter( httpsrouter);
 
 	//expose the endpoint for swagger documentation
@@ -33,9 +40,11 @@ func Init_HTTP_HTTPS(isHttps bool, URL_PORT string){
 
 	//install : openssl req -newkey rsa:4096 -nodes -sha256 -keyout key.pem -x509 -days 365 -out cert.pem
 
-	if( isHttps ){
+	if( certsForHttps != nil ){
 		// provide certs: "cert.pem" și "key.pem"
-		errRouter := http.ListenAndServeTLS(":"+URL_PORT, "cert.pem", "key.pem", httprouter )
+		errRouter := http.ListenAndServeTLS(":"+URL_PORT, 
+							certsForHttps.Cert_pem, 
+							certsForHttps.Key_pem, httprouter )
 		if errRouter != nil {
 			utils.Log_log("routner not init", "", 3, fmt.Sprint(errRouter), "")
 		}

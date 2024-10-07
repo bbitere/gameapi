@@ -3,13 +3,14 @@ package main
 import (
 
 	//api "github.com/bbitere/gameapi.git/pkg/api"
+	"github.com/bbitere/gameapi.git/pkg/api"
 	http "github.com/bbitere/gameapi.git/pkg/http"
 	utils "github.com/bbitere/gameapi.git/pkg/utils"
+	"github.com/gin-gonic/gin"
 
 	//_ "github.com/bbitere/gameapi.git/docs"
 	_ "github.com/bbitere/gameapi.git/pkg/api"
 	_ "github.com/bbitere/gameapi.git/pkg/docs"
-	//"github.com/valyala/fasthttp"
 )
 
 //url of swagger: http://localhost:8081/docs/swagger/index.html
@@ -25,10 +26,38 @@ func main() {
 
 	utils.Log_initContainerLogger( );
 
-	http.Init_HTTP_HTTPS(false, "8080" );
-	//init_HTTP_HTTPS(true, "8443" );
+	http.Init_HttpServer(nil, "8080", 
+		func(router *gin.Engine){
+			api.Api_InitRouter(router);
+		} );
+		
+	/*
+	var certsForHttps = http.CertsHttps{
+		Cert_pem :  "cert.pem",
+		Key_pem : "key.pem",
+	}
+	http.Init_HttpServer(&certsForHttps, "8080", 
+		func(router *gin.Engine){
+			api.Api_InitRouter(router);
+		} );
+	//*/
 
-	http.Init_HTTPFast(false, "8080" );
+	/*
+	http.Init_HTTPFast(nil, "8080",
+		func() func(ctx *fasthttp.RequestCtx){
+			return api.RouterFast_Handler;
+		} );
+
+	var certsForFastHttps = http.CertsFastHttps{
+			Server_crt :  "server.crt",
+			Server_key : "server.key",
+		}
+
+	http.Init_HTTPFast(&certsForFastHttps, "8080",
+		func() func(ctx *fasthttp.RequestCtx){
+			return api.RouterFast_Handler;
+		} );
+	//*/
 }
 
 

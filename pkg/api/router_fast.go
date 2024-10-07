@@ -2,6 +2,7 @@ package api
 
 import (
 	// Swagger middleware
+	http1 "github.com/bbitere/gameapi.git/pkg/http"
 	"github.com/valyala/fasthttp"
 	//"encoding/json"
 	//"fmt"
@@ -12,12 +13,12 @@ import (
 func RouterFast_Handler(ctx *fasthttp.RequestCtx) {
 
 	switch string(ctx.Path()) {
-	case "/authenticate": 	RouterFast_processRoute("Authenticate", Controller_Authenticate )
-	case "/play":  			RouterFast_processRoute("Play", Controller_Play ) 
-	case "/playautobet":  	RouterFast_processRoute("PlayAutobet", Controller_PlayAutobet ) 
-	case "/history": 		RouterFast_processRoute("HistoryList", Controller_HistoryList ) 
-	case "/cashout":  		RouterFast_processRoute("Cashout", Controller_Cashout ) 
-	case "/gameupdate":  	RouterFast_processRoute("GameUpdate", Controller_GameUpdate ) 
+	case "/authenticate": 	http1.HttpFast_processRoute("Authenticate", Controller_Authenticate )
+	case "/play":  			http1.HttpFast_processRoute("Play", Controller_Play ) 
+	case "/playautobet":  	http1.HttpFast_processRoute("PlayAutobet", Controller_PlayAutobet ) 
+	case "/history": 		http1.HttpFast_processRoute("HistoryList", Controller_HistoryList ) 
+	case "/cashout":  		http1.HttpFast_processRoute("Cashout", Controller_Cashout ) 
+	case "/gameupdate":  	http1.HttpFast_processRoute("GameUpdate", Controller_GameUpdate ) 
 		
 	case "/swagger":
 
@@ -49,6 +50,6 @@ func RouterFast_Handler(ctx *fasthttp.RequestCtx) {
 		ctx.Error("Not Found", fasthttp.StatusNotFound)
 	}
 
-	RouterFast_ConfigureCORS(ctx)
+	http1.HttpFast_ConfigureCORS(ctx)
 }
 
