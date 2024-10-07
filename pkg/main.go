@@ -26,6 +26,8 @@ func main() {
 
 	utils.Log_initContainerLogger( );
 
+	api.DataServer_init();
+
 	http.Init_HttpServer(nil, "8080", 
 		func(router *gin.Engine){
 			api.Api_InitRouter(router);
@@ -58,6 +60,8 @@ func main() {
 			return api.RouterFast_Handler;
 		} );
 	//*/
+
+	
 }
 
 

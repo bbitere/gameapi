@@ -11,7 +11,7 @@ type DataServer struct{
 
 	Mutex					sync.Mutex
 	GameLogic				*CrashGameLogic
-	Random					*random.IRandom
+	Random					random.IRandom
 	//dbCtx					*db.DatabaseContext
 }
 
@@ -20,7 +20,7 @@ var API *DataServer = nil
 func (This *DataServer) constr() *DataServer{
 
 	This.GameLogic = (new (CrashGameLogic)).Constr();
-	This.Random    = (new (*random.Mokup_Random)).Constr();
+	This.Random    = (new (random.Mokup_Random)).Constr();
 	return This;
 }
 

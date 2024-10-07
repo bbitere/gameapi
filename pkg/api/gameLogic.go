@@ -1,29 +1,22 @@
 package api
 
 import (
-	sync "sync"
+	"sync"
 
 	defs "github.com/bbitere/gameapi.git/pkg/defs"
+	models "github.com/bbitere/gameapi.git/pkg/models"
+	utils "github.com/bbitere/gameapi.git/pkg/utils"
 )
 
 const GAME_WILL_START  = 10.0
 
-type ECrashGameState string;
-const(
 
-	
-	ECrashGameState_Announce  = "announce";
-	ECrashGameState_Starting = "starting";
-	ECrashGameState_Start    = "start";
-	ECrashGameState_Playing  = "playing";
-	ECrashGameState_WaitEnd  = "wait";
-)
 type CrashGameLogic struct{
 
-	mutex					sync.Mutex
-	gameState				ECrashGameState		
-	gameWillStartInSecond	float64
-	targetMultiplicator		defs.TDecimal
+	mutex		sync.Mutex
+	GameState 	models.GameState
+
+	PlayersList	[]*models.Player
 }
 
 type CrashUserData struct{
@@ -39,17 +32,30 @@ type CrashUserData struct{
 }
 func (This *CrashGameLogic) Constr()  *CrashGameLogic{
 
+	This.PlayersList = make([]*models.Player, 0, 100);
 	This.initGame();
+	return This;
 }
 
 func (This*CrashGameLogic) initGame(){
 
-	This.gameState = EGameState_Annonce;
-	This.gameWillStartInSecond = GAME_WILL_START
-	This.targetMultiplicator = 0;
-
+	This.GameState.GameState = EGameState_Annonce;
+	This.GameState.GameWillStartInSecond = GAME_WILL_START
+	This.GameState.TargetMultiplicator = int32(API.Random.GetRandom());
 }
 func (This*CrashGameLogic) startPlayingGame(){
 
 
+}
+
+func (This*CrashGameLogic) addPlayer(name string){
+
+	var player = models.Player{
+		PlayerName: name,
+		IsHidden: false,
+		CashoutMultiplicator: 0,
+		NextRound_CashoutMultiplicator: 0,
+	}
+	
+	utils.Arr_Append(&This.PlayersList, &player );
 }
