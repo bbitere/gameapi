@@ -30,6 +30,19 @@ const (
 	ECrashGameState_WaitEnd  = "wait"
 )
 
+type TPlayerData_MsgWinOrLose   struct {
+	Timeline 		defs.TTime
+	Multiplicator 	defs.TDecimal
+	IsWin			ECrashEndLine
+	WalletAfter 	defs.TDecimal
+}
+
+type PlayerData struct{
+
+	model 			models.Player
+	winOrLose 		*TPlayerData_MsgWinOrLose;
+
+}
 
 type CrashGameLogic struct{
 
@@ -37,7 +50,7 @@ type CrashGameLogic struct{
 	LastTimeUpdate  time.Time
 	GameState 		models.GameState
 
-	PlayersList		utils.SyncArr[*models.Player]
+	PlayersList		utils.SyncArr[*PlayerData]
 }
 
 type CrashUserData struct{
@@ -53,7 +66,7 @@ type CrashUserData struct{
 }
 func (This *CrashGameLogic) Constr()  *CrashGameLogic{
 
-	This.PlayersList.Arr = make([]*models.Player, 0, 100);
+	This.PlayersList.Arr = make([]*PlayerData, 0, 100);
 	//This.initGame();
 	return This;
 }
@@ -71,7 +84,7 @@ func (This*CrashGameLogic) startPlayingGame(){
 func (This*CrashGameLogic) addPlayer(name string, bIsHidden bool, currency string, bForceSameName bool ) (string, error){
 
 	var foundPlayer = utils.SyncArr_Where( &This.PlayersList, nil,
-			func(x *models.Player) bool { return x.PlayerName == name});
+			func(x *PlayerData) bool { return x.model.PlayerName == name});
 
 	if( foundPlayer != nil && !bForceSameName ){
 
@@ -79,19 +92,23 @@ func (This*CrashGameLogic) addPlayer(name string, bIsHidden bool, currency strin
 
 	}else{
 
-		var player = models.Player{
+		var playerModel = models.Player{
 			PlayerName: name,
 			IsHidden: false,
 			Currency: currency,
 			CashedoutAtValue: 0,
 			CashoutMultiplicator: 0,
 			NextRound_CashoutMultiplicator: 0,
-			Token: uuid.New(),
+			Token: uuid.NewString(),
+		}
+		var playerData = PlayerData{
+			model: playerModel,
+
 		}
 		
-		utils.SyncArr_Append( &This.PlayersList, &player );
+		utils.SyncArr_Append( &This.PlayersList, &playerData );
 
-		return player.Token, nil;
+		return player.model.Token, nil;
 	}
 }
 

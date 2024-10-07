@@ -5,11 +5,13 @@ package api
 
 type AuthenticateInput struct{
 
-	Token 			string 		`json:"sessionUID"`
+	Token 			string 		`json:"token"`
+	Currency 		string 		`json:"currency"`
+	Language 		string 		`json:"language"`
 }
 type AuthenticateResponse struct{
 
-	UserID			string 		`json:"userID"`
+	AuthSessionID		string 		`json:"AuthSessionID"`
 	Wallet  		string  	`json:"wallet"`
 	Currency  		string  	`json:"currency"`
 	Error  			int    		`json:"error"`
@@ -27,7 +29,7 @@ func Controller_Authenticate(inp *AuthenticateInput) (*AuthenticateResponse, *Au
 
 	var outData = 	AuthenticateResponse{
 					Currency : "RON",
-					UserID: "244",
+					AuthSessionID: "244-5442352-234234",
 					Wallet: "1000",
 					Error: 0,
 					Description: "",

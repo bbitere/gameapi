@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	defs "github.com/bbitere/gameapi.git/pkg/defs"
-	models "github.com/bbitere/gameapi.git/pkg/models"
 	"github.com/bbitere/gameapi.git/pkg/utils"
 )
 
@@ -91,7 +90,7 @@ func Controller_GameUpdate(inp *GameUpdateInput) (*GameUpdateResponse, *GameUpda
 	var gameState = &This.GameLogic.GameState;
 
 	var myPlayerInst = utils.SyncArr_Where( &This.GameLogic.PlayersList, nil,
-						func(x *models.Player) bool { return x.Token == inp.PlayerToken} );
+						func(x *PlayerData) bool { return x.model.Token == inp.PlayerToken} );
 	if( myPlayerInst == nil){
 
 		var outDataErr = GameUpdateResponse{					
@@ -105,12 +104,12 @@ func Controller_GameUpdate(inp *GameUpdateInput) (*GameUpdateResponse, *GameUpda
 	outData.GameState = ECrashGameState( gameState.GameState )	
 	outData.BetStatus = getBetStatus( myPlayerInst );
 	outData.PlayerList= utils.SyncArr_Select( &This.GameLogic.PlayersList, 
-						func(x *models.Player) *PlayerItem{
+						func(x *PlayerData) *PlayerItem{
 							return &PlayerItem{
 							
-								PlayerToken:    x.Token,
-								Time:    		x.TimeStamp,
-								PlayerName:   	x.PlayerName,
+								Time:    		x.model.TimeStamp,
+								PlayerToken:    x.model.Token,								
+								PlayerName:   	x.model.PlayerName,
 								Cashout:    	defs.Number2Dec( 0 ),
 								Bet:     		defs.Number2Dec( 0 ),
 								Currency:		"RON",
@@ -119,44 +118,58 @@ func Controller_GameUpdate(inp *GameUpdateInput) (*GameUpdateResponse, *GameUpda
 							}
 						});
 
-	if( gameState.GameState == ECrashGameState_Announce){
+	if( !defs.AppConfig_USE_Websocket &&
+		myPlayerInst.winOrLose != nil ){
 
-		outData.StateAnnounce = &TypeCrashArg_Annonce{ 
-			GameWillStart: defs.TTime( gameState.TargetTime - gameState.StateTimer),
+		outData.StateMsgWinLose = &TypeCrashArg_MsgWinOrLose{ 			
+			Timeline :     myPlayerInst.winOrLose.Timeline,
+			Multiplicator: myPlayerInst.winOrLose.Multiplicator,
+			IsWin: myPlayerInst.winOrLose.IsWin,
+			WalletAfter: myPlayerInst.winOrLose.WalletAfter,
 		}
-	}else
-	if( gameState.GameState == ECrashGameState_Starting){
+		//remove the message
+		myPlayerInst.winOrLose = nil;
+	}else{
 
-		
-	}else
-	if( gameState.GameState == ECrashGameState_Playing){
+		if( gameState.GameState == ECrashGameState_Announce){
 
-		outData.StatePlaying = &TypeCrashArg_Playing{ 			
-			Timeline :     defs.TTime( gameState.TargetTime ),
-			Multiplicator: defs.Number2Dec( defs.TNumber( gameState.TargetMultiplicator) ),
+			outData.StateAnnounce = &TypeCrashArg_Annonce{ 
+				GameWillStart: defs.TTime( gameState.TargetTime - gameState.StateTimer),
+			}
+		}else
+		if( gameState.GameState == ECrashGameState_Starting){
+
+			
+		}else
+		if( gameState.GameState == ECrashGameState_Playing){
+
+			outData.StatePlaying = &TypeCrashArg_Playing{ 			
+				Timeline :     defs.TTime( gameState.TargetTime ),
+				Multiplicator: defs.Number2Dec( defs.TNumber( gameState.TargetMultiplicator) ),
+			}
+			
+		}else
+		if( gameState.GameState == ECrashGameState_WaitEnd){
+
+			
 		}
-		
-	}else
-	if( gameState.GameState == ECrashGameState_WaitEnd){
-
-		
 	}
 
 	return &outData, nil, nil;
 }
 
-func getBetStatus( player *models.Player) EBetStatus {
+func getBetStatus( player *PlayerData) EBetStatus {
 
-	if( player.CashoutMultiplicator > 0 ){
+	if( player.model.CashoutMultiplicator > 0 ){
 
-		if( player.NextRound_CashoutMultiplicator > 0 ) {
+		if( player.model.NextRound_CashoutMultiplicator > 0 ) {
 			return EBetStatus_Bet_CurrAndNextRound
 		}else{
 			return EBetStatus_Bet_CurrRound
 		}
 	}else {
 
-		if( player.NextRound_CashoutMultiplicator > 0 ) {
+		if( player.model.NextRound_CashoutMultiplicator > 0 ) {
 			return EBetStatus_Bet_NextRound
 		}else {
 			return EBetStatus_None

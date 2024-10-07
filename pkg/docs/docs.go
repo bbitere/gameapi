@@ -15,6 +15,40 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/PlayeName": {
+            "post": {
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "PlayeName user",
+                "operationId": "Controller_PlayeName",
+                "parameters": [
+                    {
+                        "description": "Auth input data",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayeNameInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayeNameResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.PlayeNameResponseErr"
+                        }
+                    }
+                }
+            }
+        },
         "/Player": {
             "post": {
                 "produces": [
@@ -258,7 +292,13 @@ const docTemplate = `{
         "api.AuthenticateInput": {
             "type": "object",
             "properties": {
-                "sessionUID": {
+                "currency": {
+                    "type": "string"
+                },
+                "language": {
+                    "type": "string"
+                },
+                "token": {
                     "type": "string"
                 }
             }
@@ -266,6 +306,9 @@ const docTemplate = `{
         "api.AuthenticateResponse": {
             "type": "object",
             "properties": {
+                "AuthSessionID": {
+                    "type": "string"
+                },
                 "currency": {
                     "type": "string"
                 },
@@ -274,9 +317,6 @@ const docTemplate = `{
                 },
                 "error": {
                     "type": "integer"
-                },
-                "userID": {
-                    "type": "string"
                 },
                 "wallet": {
                     "type": "string"
@@ -286,6 +326,9 @@ const docTemplate = `{
         "api.AuthenticateResponseErr": {
             "type": "object",
             "properties": {
+                "AuthSessionID": {
+                    "type": "string"
+                },
                 "currency": {
                     "type": "string"
                 },
@@ -294,9 +337,6 @@ const docTemplate = `{
                 },
                 "error": {
                     "type": "integer"
-                },
-                "userID": {
-                    "type": "string"
                 },
                 "wallet": {
                     "type": "string"
@@ -317,6 +357,9 @@ const docTemplate = `{
                 },
                 "numOfAutobet": {
                     "type": "integer"
+                },
+                "playerToken": {
+                    "type": "string"
                 },
                 "sessionUID": {
                     "type": "string"
@@ -354,6 +397,9 @@ const docTemplate = `{
         "api.GameUpdateInput": {
             "type": "object",
             "properties": {
+                "playerToken": {
+                    "type": "string"
+                },
                 "sessionUID": {
                     "type": "string"
                 }
@@ -491,6 +537,9 @@ const docTemplate = `{
                 "numOfAutobet": {
                     "type": "integer"
                 },
+                "playerToken": {
+                    "type": "string"
+                },
                 "sessionUID": {
                     "type": "string"
                 },
@@ -536,6 +585,9 @@ const docTemplate = `{
                 "multiplBashout": {
                     "type": "string"
                 },
+                "playerToken": {
+                    "type": "string"
+                },
                 "sessionUID": {
                     "type": "string"
                 }
@@ -569,6 +621,51 @@ const docTemplate = `{
                 }
             }
         },
+        "api.PlayeNameInput": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "string"
+                },
+                "isHidden": {
+                    "type": "boolean"
+                },
+                "playerName": {
+                    "type": "string"
+                },
+                "sessionUID": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayeNameResponse": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "playerToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.PlayeNameResponseErr": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "integer"
+                },
+                "playerToken": {
+                    "type": "string"
+                }
+            }
+        },
         "api.PlayerItem": {
             "type": "object",
             "properties": {
@@ -587,10 +684,13 @@ const docTemplate = `{
                 "isCashedout": {
                     "type": "boolean"
                 },
-                "time": {
+                "playername": {
                     "type": "string"
                 },
-                "username": {
+                "playertoken": {
+                    "type": "string"
+                },
+                "time": {
                     "type": "string"
                 }
             }
