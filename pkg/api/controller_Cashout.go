@@ -14,6 +14,8 @@ import (
 type CashoutInput struct{
 
 	SessionID				string 			`json:"sessionUID"`
+	PlayerToken				string 			`json:"playerToken"`
+	
 	Bet 					defs.TDecimal	`json:"bet"`
 	MultiplicatorCashout 	defs.TDecimal	`json:"multiplBashout"`
     NumOfAutoBets 			int				`json:"numOfAutobet"`

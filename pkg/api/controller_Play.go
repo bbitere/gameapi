@@ -21,6 +21,8 @@ const (
 type PlayInput struct{
 
 	SessionID				string 			`json:"sessionUID"`
+	PlayerToken				string 			`json:"playerToken"`
+	
 	Bet 					defs.TDecimal	`json:"bet"`
 	MultiplicatorCashout 	defs.TDecimal	`json:"multiplBashout"`
 	Command					ECommand		`json:"commandID"`

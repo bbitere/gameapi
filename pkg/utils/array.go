@@ -1,5 +1,27 @@
 package utils
 
+func Arr_Where[T comparable](arr *[]*T, fnCmp func(x *T) bool) *T {
+
+	for _, elem := range *arr {
+		if fnCmp(elem) {
+			return elem
+		}
+	}
+	return nil
+}
+
+func Arr_Select[T comparable, V any](arr *[]T, fnGetElem func(x T) V) []V {
+
+	var ret = make([]V, 0, len(*arr))
+
+	for _, elem := range *arr {
+
+		var e V = fnGetElem(elem)
+		Arr_Append(&ret, e)
+	}
+	return ret
+}
+
 // utility method: array: contains
 func Arr_Contains[T comparable](arr *[]T, value T) bool {
 
@@ -35,7 +57,7 @@ func Arr_InsertAtIndex[T any](a *[]T, index int, value T) {
 
 	} else {
 		*a = append((*a)[:index+1], (*a)[index:]...) // index < len(a)
-		(*a)[index] = value		
+		(*a)[index] = value
 	}
 }
 

@@ -15,16 +15,17 @@ import (
 type EInteractivUserFlag string
 const
 (
-    List = "l"
-    Add = "a"
-    Del = "d"
+    EInteractivUserFlag_List = "l"
+    EInteractivUserFlag_Add = "a"
+    EInteractivUserFlag_Del = "d"
 )
 
 
 type PlayerItem struct{
 
 	Time    		time.Time		`json:"time"`
-	UserName   		string			`json:"username"`
+	PlayerName 		string			`json:"playername"`
+	PlayerToken		string			`json:"playertoken"`
 	Cashout    		defs.TDecimal	`json:"cashout"`
 	Bet     		defs.TDecimal	`json:"bet"`
 	Currency		string			`json:"currency"`

@@ -9,7 +9,7 @@ import (
 
 type DataServer struct{
 
-	Mutex					sync.Mutex
+	LogicMutex					sync.Mutex
 	GameLogic				*CrashGameLogic
 	Random					random.IRandom
 	//dbCtx					*db.DatabaseContext
@@ -19,14 +19,19 @@ var API *DataServer = nil
 
 func (This *DataServer) constr() *DataServer{
 
-	This.GameLogic = (new (CrashGameLogic)).Constr();
 	This.Random    = (new (random.Mokup_Random)).Constr();
+	This.GameLogic = (new (CrashGameLogic)).Constr();
+	
 	return This;
 }
 
-func DataServer_init(){
+func DataServer_init() *DataServer{
 
-	API = (new (DataServer)).constr();
+	var server = (new (DataServer)).constr();
+	API = server;
 
+	server.GameLogic.initGame(server)
+
+	return server;
 }
 

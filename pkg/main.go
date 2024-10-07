@@ -24,14 +24,19 @@ const URL_PORT = "8081"
 // @query.collection.format multi
 func main() {
 
+	defer utils.LogPanic();
+	utils.StartLogPanic();
+
 	utils.Log_initContainerLogger( );
 
-	api.DataServer_init();
+	var server = api.DataServer_init();
 
 	http.Init_HttpServer(nil, "8080", 
 		func(router *gin.Engine){
 			api.Api_InitRouter(router);
 		} );
+
+	
 		
 	/*
 	var certsForHttps = http.CertsHttps{
@@ -61,6 +66,8 @@ func main() {
 		} );
 	//*/
 
+
+	server.GameLogic.InitMainThread( server );
 	
 }
 
